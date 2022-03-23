@@ -1,0 +1,27 @@
+name: 'for-each-pr'
+description: 'Runs a command for each PR in a set of PRs'
+author: 'Jason Walton'
+inputs:
+  command:
+    required: true
+    description: 'The command to run for each PR.'
+  github-token:
+    required: false
+    description: The GitHub token used to create an authenticated client.  Defaults to github provided token.
+    default: ${{ github.token }}
+  state:
+    required: false
+    description: 'If provided, only PRs with the specified state will be used (e.g. "open", "closed", or "all").  Defaults to "open".'
+    default: 'open'
+  label:
+    required: false
+    description: 'If provided, only PRs with the specified label will be used (e.g. "bugfix").'
+  author:
+    required: false
+    description: 'If provided, only PRs where the author is the specified GitHub username will be used (e.g. "jwalton").'
+  baseRef:
+    required: false
+    description: 'If provided, only PRs with the specified baseRef will be used (e.g. "main").'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
