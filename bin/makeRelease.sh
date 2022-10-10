@@ -7,7 +7,6 @@
 # To use, you need to have the following installed:
 #
 # * `gh` - The GitHub CLI - https://cli.github.com/
-# * `cut` - The usual /usr/bin/cut.
 #
 
 MASTER_BRANCH=main
@@ -42,9 +41,15 @@ then
     exit 1
 fi
 
-if ! command -v cut &> /dev/null
+if ! command -v node &> /dev/null
 then
-    echo "cut command not found"
+    echo "node command not found"
+    exit 1
+fi
+
+if ! command -v npm &> /dev/null
+then
+    echo "npm command not found"
     exit 1
 fi
 
@@ -59,7 +64,7 @@ if ! NEXT_VERSION=$(npm version "${1}"); then
   echo "Bumping version in NPM failed"
 fi
 
-MAJOR_VERSION=$(echo $NEXT_VERSION | cut -d '.' -f 1)
+MAJOR_VERSION=$(node -e "console.log('v' + require('./package.json').version.split('.')[0])")
 echo "Updated version: ${NEXT_VERSION}, Major version: ${MAJOR_VERSION}"
 if [ $(confirm) == "no" ]; then
   echo "Aborting."
