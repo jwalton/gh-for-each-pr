@@ -1,6 +1,6 @@
 {
     "name": "gh-for-each-pr",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "GitHub action to run a command for each matching pull request",
     "main": "lib/main.js",
     "scripts": {
