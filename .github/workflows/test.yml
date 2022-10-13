@@ -1,13 +1,16 @@
 name: 'build-test'
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
+    paths-ignore:
+      - '**.md'
   push:
     branches:
       - main
-      - 'releases/*'
+    paths-ignore:
+      - '**.md'
 
 jobs:
-  build: # make sure build/ci work properly
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.1.0
@@ -15,10 +18,12 @@ jobs:
           npm install
       - run: |
           npm run all
-  test: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3.1.0
-      - uses: ./
+      - name: test
+        uses: ./
         with:
           command: echo ${PR_NUMBER}
+      - name: Semantic-release
+        if: github.ref == 'refs/heads/main'
+        run: npm run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

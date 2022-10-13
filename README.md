@@ -1,5 +1,7 @@
 # for-each-pr
 
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
 This is a GitHub action for executing a command for each PR that meets some criteria.
 
 ## A Quick Example
