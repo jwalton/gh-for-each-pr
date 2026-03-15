@@ -23,7 +23,7 @@ inputs:
     required: false
     description: 'If provided, only PRs with the specified baseRef will be used (e.g. "main").'
 runs:
-  using: 'node16'
+  using: 'node24'
   main: 'dist/index.js'
 branding:
   icon: git-pull-request
